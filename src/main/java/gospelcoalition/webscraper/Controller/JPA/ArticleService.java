@@ -4,7 +4,7 @@ import gospelcoalition.webscraper.Model.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Set;
+import java.util.List;
 
 /**
  * Created by IntelliJ IDEA.
@@ -20,13 +20,14 @@ public class ArticleService {
     private ArticleRepository articleRepository;
 
     //Check every article in list against the database to ensure its not duplicated.
-    public void addToDbIfNotExist(Set<Article> articleList) {
+    public void addToDbIfNotExist(List<Article> articleList) {
         for (Article article : articleList) {
             if (!articleRepository.existsArticleByTitle(article.getTitle())) {
                 articleRepository.save(article);
             }
         }
     }
+
 
     public void add(Article article){
         articleRepository.save(article);
