@@ -61,7 +61,7 @@ public class GospelCoalitionDocument {
 
                 Document document2 = Jsoup.connect(articleUrl).get();
                 Element dateElement = document2.selectFirst("time");
-                if (dateElement == null) {
+                if (dateElement == null || !articleUrl.contains("thegospelcoalition")) {
                     articleSet.add(new Article(articleTitle, articleUrl));
                 } else {
                     Date date = java.sql.Date.valueOf(LocalDate.parse(dateElement.text(), DateTimeFormatter.ofPattern("MMMM d, uuuu")));
